@@ -1,32 +1,31 @@
+<?php
+require_once 'config.php';
+
+
+if(isset($_GET['begin'])) {
+    $_SESSION['current_question'] = 1;
+    $_SESSION['answers'] = [];
+    header('Location: questions.php');
+    exit;
+}
+
+$stmt = $pdo->query('SELECT COUNT(*) FROM questions');
+$totalQuestions = $stmt->fetchColumn();
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quiz app</title>
+    <title>Quiz App</title>
 </head>
 <body>
-    <h2>Quiz Game</h2>
-    <div class = "quiz-container">
-        <p> Q. What is the largest mammal?</p>
-        <form method="POST">
-            <button type="submit" name ="answer" value="Elephant"> Elephant </button>
-            <button type="submit" name ="answer" value="Hippopotamus"> Hippopotamus </button>
-            <button type="submit" name ="answer" value="Blue Whale"> Blue Whale </button>
-            <button type="submit" name ="answer" value="Giraffe"> Giraffe </button>
-        </form>
-        <?php 
-        if(isset($_POST['answer'])) {
-            $correct = "Blue Whale";
-
-            if($_POST['answer'] == $correct) {
-                echo "<p>CORRECT</p>";
-            } else {
-                echo "<p>WRONG ANSWER</p>";
-            }
-        }
-        ?> 
+    <div>
+        <h1>General Knowledge Quiz</h1>
+        <p>Test your knowledge with <?php echo $totalQuestions; ?> questions!</p>
+        <a href="?begin">Start Quiz</a>
     </div>
-
 </body>
 </html>
