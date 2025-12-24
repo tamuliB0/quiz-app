@@ -7,7 +7,7 @@ if($_SERVER['REQUEST_METHOD'] != 'POST' || !isset($_POST['answer'])) {
 }
 
 $currentQuestion = $_SESSION['current_question'];
-$_SESSION['answer'][$currentQuestion] = $_POST['answer'];
+$_SESSION['answers'][$currentQuestion] = $_POST['answer'];
 
 if (isset($_POST['action'])) {
     if($_POST['action'] == 'previous') {
